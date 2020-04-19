@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+
+
+
+ <div id="menusContainer">
+   <h1><%= @menu.title %></h1>
+   <%= image_tag @menu.url, :class => 'welcomIm'  %>
+       <h2><%= @menu.description %></h1>
+   
+    <div class="menuhols">
+       <p>Price <%= number_to_currency(@menu.price, :unit => "€") %>
+       <br>
+        Category: <%= @menu.category %>
+        <br>
+        
+       
+       <p>
+         <%= link_to 'Back',  menus_path, :class => "button", :role => "button" %>
+         <%= link_to 'Edit',  edit_menu_path(@menu), :class => "button", :role => "button" %>
+         
+       </p>
+        
+      </div>
+   
+   
+   </div>
+
+<%= link_to 'Edit', edit_menu_path(@menu) %> |
+<%= link_to 'Back', menus_path %>

@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="divC">
+ </br>
+ <h1> Our Yummy Products</h1>
+</div>
+</br>
+</br>
+
+ <% @menus.each do |menu| %>
+ <div class="menuhols">
+ <h1><%= menu.title %></h1>
+
+
+ <%= link_to (image_tag menu.url, :class => "menuholsIm"), menu %>
+ <p><%= menu.description %></p>
+ <p>Price <%= number_to_currency(menu.price, :unit => "€") %>
+ <br>
+ Category: <%= menu.category %></p>
+
+
+ 
+ <p>
+ 
+ <%= link_to 'Show', menu, :class => "button", :role => "button" %>
+ <% if session[:login] == 1 %> 
+ <%= link_to 'Edit', edit_menu_path(menu), :class => "button", :role => "button" %>
+ <%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure?' }, :class => "button", :role =>
+"button" %>
+<% end %>
+ <% if user_signed_in? %>
+ <a href="/cart/<%= menu.id %>" class="button">Add To Cart</a>
+<% end %>
+ </p>
+ </div>
+ <% end %>
+</div>
+<br>
+
+<footer class="foot">
+<% if session[:login] == 1 %> 
+if current_user.admin?
+<%= link_to 'New Menu Item', new_menu_path, :class =>"button", :role=>"button" %>
+<%= link_to 'New Category', new_category_path, :class =>"button", :role=>"button"  %>
+<% end %>
+</footer>
+
+
+
+
+
+

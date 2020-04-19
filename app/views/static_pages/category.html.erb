@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<div id="menusContainer">
+<h1>Menus</h1>
+<br>
+    <% @menus.each do |menu | %>
+      <div class="menuhols">
+        <h1><%= menu.title %></h1>
+        <%= link_to (image_tag menu.url, :class=>"menuholsIm"), menu %>
+       <p><%= menu.description %>
+       </p>
+       <p><%= menu.price %>
+        <br>
+        <%= menu.category %>
+       
+        </p>
+        <p>        
+         
+          <a href="/cart/<%= menu.id %>" class="button">Add to Cart</a>  
+          <%= link_to 'Show', menu, :class =>"button", :role=>"button" %>
+        
+
+        <% if session[:login] == 1 %> 
+        <%= link_to 'Edit', edit_menu_path(menu), :class =>"button", :role=>"button" %>
+        <%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"button",           :role=>"button" %>
+        
+        <% end %>
+      
+        </p>
+     </div>
+    <% end %>
+  <br>
+
+<% if @menus.length == 0  %>
+<br />
+<h2>Sorry, there are currently no products in this category.</h2>
+<% end %>

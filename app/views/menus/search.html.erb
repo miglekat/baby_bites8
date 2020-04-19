@@ -1,0 +1,39 @@
+<h2>You Searched Our Product Catalog For <%= @search_term %></h2>
+
+<% if @menus.length ==0  %>
+<br />
+<h2>No products were found to match your search</h2>
+<% end %>
+
+<table class="catalog">
+  <% @menus.each do |menu| %>
+      <tr>
+        <td>
+          <div class="image">
+            <%= link_to (image_tag menu.url, :style => "height:100px"), menu %>
+          </div>
+          <div class="title">
+            <%= link_to menu.title, menu %>
+          </div>
+          <div class="description">
+            <%= menu.description %>
+          </div>  
+          <div class="price">
+             <%= number_to_currency(menu.price, :unit => "€") %>
+          </div>
+          <div class="links">
+            <% if user_signed_in? %>
+              <%= link_to 'Edit', edit_menu_path(menu) %>
+              <%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%else%>
+            
+              <a href="/cart/<%= menu.id %>">Add to Cart</a>
+            <%end%> 
+            </br>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+</table>
+
+

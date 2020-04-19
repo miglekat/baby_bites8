@@ -1,0 +1,38 @@
+
+<h1>Explore Our Most Popular products</h1>
+</br>
+
+<div id="menusContainer">
+
+  <% @menus.limit(2).order(:id).each do |menu| %>
+      <tr>
+        <td>
+          <div class="image">
+            <%= link_to (image_tag menu.url, :style => "height:100px"), menu %>
+          </div>
+          <div class="title">
+            <%= link_to menu.title, menu %>
+          </div>
+          <div class="description">
+            <%= menu.description %>
+          </div>  
+          <div class="price">
+             <%= number_to_currency(menu.price, :unit => "€") %>
+          </div>
+          
+          <div class="links">
+            <% if session[:login] ==1 %>
+              <%= link_to 'Edit', edit_menu_path(menu) %>
+              <%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%else%>
+            
+              <a href="/cart/<%= menu.id %>">Add to Cart</a>
+            <%end%>  
+            </br>
+          <br>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+    
+</table>

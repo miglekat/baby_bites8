@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="footer, address, phone, icons" />
+	
+    <title><%= content_for(:title) ?  yield(:title): "BabyBites" %> </title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'  %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     	 
+  
+  </head>
+
+  <body>
+    
+     <header class="headSec">
+ <h1>Baby Bites</h1>
+
+ <ul>
+ <li><%= link_to "Home", root_path %></li>
+ <li><%= link_to "Milestones", help_path  %></li>
+ <li><%= link_to "Menu", "/menus" %></li>
+ <li><%= link_to "View Cart", "/cart" %></li>
+ 
+                   <% if user_signed_in? %>
+                 <li><a href="#">Hi <%= current_user.email %></a></li>
+                  <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+                 <li><%= link_to "View Orders", orders_path  %></li>
+                 <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+                 <li><%= link_to 'Register', new_user_registration_path %></li> 
+                 <li><%= link_to 'Sign in', new_user_session_path %></li>
+          <% end %>
+
+
+        <% if session[:login] == 1 %> 
+        <li><%= link_to "Admin Logout", logout_path %></li>
+        <% else %>
+        
+        <li><%= link_to "Admin Login", login_path %></li>
+        <% end %>
+ <li><%= link_to "Contact Us", about_path  %></li>
+ </ul>
+
+ </header>
+ 
+ 
+ 
+ <div class="container">
+ <%= yield %>
+<%=render 'layouts/search'%>
+
+ </div>
+ 
+<footer class="footer-distributed">
+ 
+			<div class="footer-left">
+				<h3>About<span>BabyBites</span></h3>
+ 
+				<p class="footer-links">
+					<a href="#">Home</a>
+					|
+					<a href="#">Blog</a>
+					|
+					<a href="#">About</a>
+					|
+					<a href="#">Contact</a>
+				</p>
+ 
+				<p class="footer-company-name">© 2020 BabyBites</p>
+			</div>
+ 
+			<div class="footer-center">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					  <p><span>401 Maple Street road
+						 St.Michaels Park</span>
+						Dublin 12, Dublin, Ireland</p>
+				</div>
+ 
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>+953 524 1534</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@eduonix.com">support@baby-bitescontactemail.com</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+					<span>About the company</span>
+					We offer the highest quality nutritional food to suite all your babies needs and also offer all the information to get you the best plan.</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+
+
